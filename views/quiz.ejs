@@ -4,9 +4,24 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script defer src="/javascript/quizController.js"></script>
 	<title>Document</title>
 </head>
 <body>
 	<h1>Quiz</h1>
+	<h3>Image</h3>
+	<div onclick="toggleFake(this)">
+		<input type="checkbox" onclick="toggleFake(this)" id="fakeButton" value="fake"><label>Fake</label>
+	</div>
+	<div onclick="toggleReal(this)">
+		<input type="checkbox" onclick="toggleReal(this)" id="realButton" value="real"><label>Real</label>
+	</div>
+
+	<br>
+	<br>
+	<button onclick="backClick()" id="backButton">Back</button>
+	<button onclick="nextClick()" id="nextButton">Next</button>
+	<h5 id="pageDisplay">Page <span id="page"></span> of <span id="pageLimit"></span></5h>
+	<h5 onclick="updateAnswerTracker()" id="answerTracker">broken... click this to reload</5h>
 </body>
 </html>
