@@ -24,15 +24,23 @@ const images = {
 let page = 0;
 const pageLimit = Object.keys(images).length - 1;
 
-window.onload = function() {
+let realButton;
+let fakeButton;
+let backButton;
+let nextButton;
+let imageElement;
+
+
+$(window).load(function() {
+	realButton = $("#realButton");
+	fakeButton = $("#fakeButton");
+	backButton = $("#backButton");
+	nextButton = $("#nextButton");
+	imageElement = $("#image");
 	check();
-};
+});
 
 
-const realButton = document.getElementById("realButton");
-const fakeButton = document.getElementById("fakeButton");
-const backButton = document.getElementById("backButton");
-const nextButton = document.getElementById("nextButton");
 
 function check() {
 	if (page < 0) {
@@ -44,18 +52,20 @@ function check() {
 	}
 
 	if (images[page].value == "real") {
-		realButton.checked = true;
-		fakeButton.checked = false;
+		realButton.prop("checked", true);
+		fakeButton.prop("checked", false);
 	} else if (images[page].value == "fake") {
-		realButton.checked = false;
-		fakeButton.checked = true;
+		realButton.prop("checked", false);
+		fakeButton.prop("checked", true);
 	} else {
-		realButton.checked = false;
-		fakeButton.checked = false;
+		realButton.prop("checked", false);
+		fakeButton.prop("checked", false);
 	}
 
-	document.getElementById("page").innerHTML = page + 1;
-	document.getElementById("pageLimit").innerHTML = pageLimit + 1;
+	$("#page").text(page + 1);
+	$("#pageLimit").text(pageLimit + 1);
+
+	updateImage();
 
 	updateAnswerTracker();
 }
@@ -76,33 +86,41 @@ function nextClick() {
 }
 
 function toggleFake() {
-	if (fakeButton.checked) {
-		fakeButton.checked = false;
+	if (fakeButton.prop("checked")) {
+		fakeButton.prop("checked", false);
 	} else {
-		if (realButton.checked) {
-			realButton.checked = false;
+		if (realButton.prop("checked")) {
+			realButton.prop("checked", false);
 		}
 
-		fakeButton.checked = true;
+		fakeButton.prop("checked", true);
 	}
 }
 
 function toggleReal() {
-	if (realButton.checked) {
-		realButton.checked = false;
+	if (realButton.prop("checked")) {
+		realButton.prop("checked", false);
 	} else {
-		if (fakeButton.checked) {
-			fakeButton.checked = false;
+		if (fakeButton.prop("checked")) {
+			fakeButton.prop("checked", false);
 		}
 
-		realButton.checked = true;
+		realButton.prop("checked", true);
 	}
 }
 
+
+const prefix = "/images/";
+const suffix = ".png";
+
+function updateImage() {
+	imageElement.prop("src", prefix + page + suffix);
+}
+
 function saveAnswer() {
-	if (realButton.checked) {
+	if (realButton.prop("checked")) {
 		images[page].value = "real";
-	} else if (fakeButton.checked) {
+	} else if (fakeButton.prop("checked")) {
 		images[page].value = "fake";
 	} else {
 		images[page].value = null;
@@ -122,5 +140,5 @@ function updateAnswerTracker() {
 		bar = (bar == null ? "" : bar + " - ") + temp;
 	}
 
-	document.getElementById("answerTracker").innerHTML = bar;
+	$("#answerTracker").text(bar);
 }
