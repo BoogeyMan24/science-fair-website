@@ -10,7 +10,6 @@ router.get("/", async (req, res) => {
 const format = /[`0123456789!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 router.post("/", async (req, res) => {
 	const id = createRandomId();
-	console.log(req);
 
 	const count = readFileSync("./count.txt", "utf-8");
 	const newCount = parseInt(count) + 1;
@@ -27,7 +26,7 @@ router.post("/", async (req, res) => {
 		return;
 	}
 	try {
-		let grade = parseInt(req.body.class);
+		const grade = parseInt(req.body.class);
 		if (grade < 7 || grade > 12) {
 			handleError(res, req, "invalidclass");
 			return;
@@ -37,7 +36,7 @@ router.post("/", async (req, res) => {
 		return;
 	}
 	try {
-		let age = parseInt(req.body.age);
+		const age = parseInt(req.body.age);
 		if (age < 1 || age > 100) {
 			handleError(res, req, "invalidage");
 			return;
@@ -47,7 +46,7 @@ router.post("/", async (req, res) => {
 		return;
 	}
 	try {
-		let confidence = parseInt(req.body.confidence);
+		const confidence = parseInt(req.body.confidence);
 		if (confidence < 0 || confidence > 100) {
 			handleError(res, req, "invalidconfidence");
 			return;
@@ -90,7 +89,7 @@ router.get("/:id", async (req, res) => {
 function handleError(res, req, error) {
 	let errorMsg = "No Corresponding Error Message Found.";
 	switch (error) {
-	case "aleardyexists":
+	case "alreadyexists":
 		errorMsg = "That person is already registered.";
 		break;
 	case "noterms":
