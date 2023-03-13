@@ -3,11 +3,13 @@ const { readFileSync, writeFileSync } = require("fs");
 const userModel = require("../models/user");
 const router = express.Router();
 
+const idLength = 20;
+
 router.get("/", async (req, res) => {
 	res.render("quizmain.ejs");
 });
 
-const format = /[`0123456789!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+const format = /[`0123456789!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
 router.post("/", async (req, res) => {
 	const id = createRandomId();
 
@@ -68,17 +70,55 @@ router.post("/", async (req, res) => {
 		});
 		await user.save();
 
+		res.redirect(`/quiz/${newCount}?form=${id}`);
 	} catch (e) {
 		handleError(res, req, "alreadyexists");
 		return;
 	}
+});
 
-	res.redirect(`/quiz/${newCount}?form=${id}`);
+router.get("/thanks", async (req, res) => {
+	let userData;
+	if (req.query.form == null) {
+		return;
+	} else {
+		userData = await userModel.findOne({ id: req.query.form });
+		if (userData == null) {
+			return;
+		} else if (userData.results == null) {
+			return;
+		}
+	}
+
+	res.send(`Thanks for participating! You will be able to get your results after the science fair. To get results: you will either have to ask Adam/Petr at the science fair or hold on to your id (${req.query.form}) and access a link (that will be revealed at the science fair) using that id.`);
+});
+
+router.post("/submit", async (req, res) => {
+	let userData;
+	if (req.body.id == null) {
+		return;
+	} else {
+		userData = await userModel.findOne({ id: req.body.id });
+		if (userData == null) {
+			return;
+		}
+	}
+
+	delete req.body.id;
+	await userData.updateOne({
+		$set: {
+			results: req.body,
+		},
+	}).then(() => {
+		res.send({ success: true });
+	});
+
+	return 0;
 });
 
 router.get("/:id", async (req, res) => {
 	const userData = await userModel.findOne({ id: req.query.form });
-	if (userData == null) {
+	if (userData == null || userData.results != null) {
 		res.redirect("/");
 		return;
 	}
@@ -113,9 +153,9 @@ function handleError(res, req, error) {
 }
 
 function createRandomId() {
-	let id = Math.floor(Math.random() * (10 - 0) + 0);
-	for (let i = 0; i < 19; i++) {
-		id = id + Math.floor(Math.random() * (10 - 0) + 0).toString();
+	let id;
+	for (let i = 0; i < idLength; i++) {
+		id = (id == null ? Math.floor(Math.random() * (10 - 0) + 0).toString() : id) + Math.floor(Math.random() * (10 - 0) + 0).toString();
 	}
 
 	return id;

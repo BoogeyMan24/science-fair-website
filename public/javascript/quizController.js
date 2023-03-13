@@ -19,15 +19,19 @@ const images = {
 	"17": { value: null },
 	"18": { value: null },
 	"19": { value: null },
+	id: null,
 };
 
+const idLength = 20;
+
 let page = 0;
-const pageLimit = Object.keys(images).length - 1;
+const pageLimit = idLength - 1;
 
 let realButton;
 let fakeButton;
 let backButton;
 let nextButton;
+let submitButton;
 let imageElement;
 
 
@@ -36,6 +40,7 @@ $(window).load(function() {
 	fakeButton = $("#fakeButton");
 	backButton = $("#backButton");
 	nextButton = $("#nextButton");
+	submitButton = $("#submitButton");
 	imageElement = $("#image");
 	check();
 });
@@ -49,6 +54,16 @@ function check() {
 	} else if (page > pageLimit) {
 		page = pageLimit;
 		check();
+	}
+
+	if (page == 0) {
+		backButton.prop("disabled", true);
+	} else if (page == pageLimit) {
+		nextButton.text("Finish");
+	} else {
+		backButton.prop("disabled", false);
+		nextButton.text("Next");
+		submitButton.css("display", "none");
 	}
 
 	if (images[page].value == "real") {
@@ -79,8 +94,23 @@ function backClick() {
 }
 
 function nextClick() {
-	if (page + 1 > pageLimit) { return; } // USELESS LINE (INCASE SOMEONE RUN nextClick() from console)
 	saveAnswer();
+	if (nextButton.text() == "Finish") {
+		let allAnswered = true;
+		for (let i = 0; i < pageLimit; i++) {
+			if (images[i].value == null) {
+				allAnswered = false;
+			}
+		}
+		if (allAnswered) {
+			submitButton.css("display", "block");
+		} else {
+			submitButton.css("display", "block");
+			submitButton.prop("disabled", true);
+			submitButton.text("not everything answered");
+		}
+	}
+	if (page + 1 > pageLimit) { return; } // USELESS LINE (INCASE SOMEONE RUN nextClick() from console)
 	page++;
 	check();
 }
@@ -141,4 +171,27 @@ function updateAnswerTracker() {
 	}
 
 	$("#answerTracker").text(bar);
+}
+
+function submit(e) {
+	/* stop form from submitting normally */
+	e.preventDefault();
+
+	const data = images;
+	data.id = (window.location.href).slice((window.location.href).length - idLength - 1);
+	$.ajax({
+		url: `/quiz/submit`,
+		type: "POST",
+		contentType: "application/json",
+		dataType: "json",
+		data: JSON.stringify(data),
+		success: function(data) {
+			console.log("success returned in ajax");
+		},
+		error: function(xhr, status, error) {
+			console.log("failure");
+		},
+	}).done(() => {
+		window.location.href = `/quiz/thanks?form=${(window.location.href).slice((window.location.href).length - idLength - 1)}`;
+	});
 }

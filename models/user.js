@@ -12,7 +12,7 @@ const schema = new Schema(
 		age: { type: Number, require: true },
 		confidence: { type: Number, require: true },
 
-		results: { type: Object, default: {} },
+		results: { type: Object, default: null },
 	},
 );
 

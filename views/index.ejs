@@ -4,13 +4,16 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/index.css">
 	<title>Document</title>
 </head>
 <body>
-	<h1>Is It <%= title %>?</h1>
-	<h4>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae ut porro aliquam ex praesentium cum perferendis eos illo cupiditate, natus et distinctio dolor facilis labore sequi! Ex quia cupiditate ipsa. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam omnis tenetur perspiciatis earum alias dolor voluptatem fugit totam esse hic fuga cupiditate asperiores, veniam porro dicta molestiae quos expedita! Omnis.</h4>
-	<form action="/quiz" method="GET">
-		<button type="submit">quiz</button>
-	</form>
+	<div class="div">
+		<h1 class="centered title">Is It <%= title %>?</h1>
+		<h4 class="centered description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae ut porro aliquam ex praesentium cum perferendis eos illo cupiditate, natus et distinctio dolor facilis labore sequi! Ex quia cupiditate ipsa. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam omnis tenetur perspiciatis earum alias dolor voluptatem fugit totam esse hic fuga cupiditate asperiores, veniam porro dicta molestiae quos expedita! Omnis.</h4>
+		<form action="/quiz" method="GET" class="centered button-form">
+			<button type="submit" class="button centered"><span>Quiz </span></button>
+		</form>
+	</div>
 </body>
 </html>
