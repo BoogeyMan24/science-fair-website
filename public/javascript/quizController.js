@@ -85,6 +85,7 @@ function check() {
 	updateAnswerTracker();
 }
 
+let allAnswered = true;
 
 function backClick() {
 	if (page - 1 < 0) { return; } // USELESS LINE (INCASE SOMEONE RUN backClick() from console)
@@ -94,23 +95,27 @@ function backClick() {
 }
 
 function nextClick() {
-	saveAnswer();
 	if (nextButton.text() == "Finish") {
-		let allAnswered = true;
-		for (let i = 0; i < pageLimit; i++) {
+		saveAnswer();
+		for (let i = 0; i <= pageLimit; i++) {
 			if (images[i].value == null) {
 				allAnswered = false;
 			}
 		}
 		if (allAnswered) {
 			submitButton.css("display", "block");
+			submitButton.prop("disabled", false);
+			submitButton.text("Confirm & Submit");
 		} else {
 			submitButton.css("display", "block");
 			submitButton.prop("disabled", true);
-			submitButton.text("not everything answered");
+			submitButton.text("Not Everything Answered");
 		}
+
+		return;
 	}
 	if (page + 1 > pageLimit) { return; } // USELESS LINE (INCASE SOMEONE RUN nextClick() from console)
+	saveAnswer();
 	page++;
 	check();
 }
@@ -125,6 +130,8 @@ function toggleFake() {
 
 		fakeButton.prop("checked", true);
 	}
+
+	submitButton.css("display", "none");
 }
 
 function toggleReal() {
@@ -137,6 +144,8 @@ function toggleReal() {
 
 		realButton.prop("checked", true);
 	}
+
+	submitButton.css("display", "none");
 }
 
 
@@ -148,6 +157,7 @@ function updateImage() {
 }
 
 function saveAnswer() {
+	allAnswered = true;
 	if (realButton.prop("checked")) {
 		images[page].value = "real";
 	} else if (fakeButton.prop("checked")) {
