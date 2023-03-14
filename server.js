@@ -32,7 +32,7 @@ mongoose.set("strictQuery", false);
 // PRINT ERROR/CONNECTION
 const db = mongoose.connection;
 db.on("error", error => console.log(error));
-db.once("open", () => console.log("Connected to Database"));
+// db.once("open", () => console.log("Connected to Database"));
 
 
 /* --------------------DEAL WITH APP ROUTES-------------------- */
