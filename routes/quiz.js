@@ -2,6 +2,7 @@ const express = require("express");
 const { readFileSync, writeFileSync } = require("fs");
 const userModel = require("../models/user");
 const router = express.Router();
+const path = require("path");
 
 const idLength = 20;
 
@@ -13,10 +14,10 @@ const format = /[`0123456789!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
 router.post("/", async (req, res) => {
 	const id = createRandomId();
 
-	const count = readFileSync("../count.txt", "utf-8");
+	const count = readFileSync(path.join(process.cwd(), "count.txt"), "utf-8");
 	const newCount = parseInt(count) + 1;
 
-	writeFileSync("../count.txt", newCount.toString());
+	writeFileSync(path.join(process.cwd(), "count.txt"), newCount.toString());
 
 
 	if (req.body.acceptedTerms == null) {
