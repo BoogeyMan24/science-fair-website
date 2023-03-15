@@ -4,50 +4,68 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/quizmain.css">
 	<title>Document</title>
 </head>
 <body>
-	<h1>Quiz</h1>
-	<form action="/quiz" method="post">
+	<div>
+		<h1 class="centered title ">Begin</h1>
+		<form class="centered" action="/quiz" method="post">
 
-		<label for="fullName">Full Name</label>
-		<input type="text" value="<%= locals.fullName || "" %>" name="fullName">
+			<div>
+				<label for="fullName">Full Name</label>
+				<br>
+				<input type="text" value="<%= locals.fullName || "" %>" name="fullName">
+			</div>
+
+			<br>
+
+			<div>
+				<label for="class">Class</label>
+				<br>
+				<select id="class" name="class">
+					<option value="7">12 yo</option>
+					<option value="8">13 yo</option>
+					<option selected="selected" value="9">Sec 1</option>
+					<option value="10">Sec 2</option>
+					<option value="11">Sec 3</option>
+					<option value="12">Sec 4</option>
+				</select>
+			</div>
+			
+			<br>
+
+			<div>
+				<label for="age">Age</label>
+				<br>
+				<input type="number" value="<%= locals.age || "" %>" step="1" min="1" max="99" name="age">
+			</div>
+
+			<br>
+
+			<div>
+				<label for="confidence">How many do you think you will get right?</label>
+				<br>
+				<input type="number" value="<%= locals.confidence || "" %>" value="0" step="1" min="0" max="100" name="confidence">
+				<label for="confidence">%</label>
+			</div>
+			
+
+			<br>
+
+			<input type="checkbox" name="acceptedTerms">
+			<label for="accept">You agree to participate</label>
+
+			<br>
+			<br>
+
+			<div class="button-wrapper">
+				<button type="submit" class="button"><span>Start Quiz </span></button>
+			</div>
+		</form>
 
 		<br>
-
-		<label for="class">Class</label>
-		<select id="class" name="class">
-			<option value="7">Grade 7</option>
-			<option value="8">Grade 8</option>
-			<option value="9">Grade 9</option>
-			<option value="10">Grade 10</option>
-			<option value="11">Grade 11</option>
-			<option value="12">Grade 12</option>
-		</select>
-
-		<br>
-
-		<label for="age">Age</label>
-		<input type="number" value="<%= locals.age || "" %>" step="1" min="1" max="99" name="age">
-
-		<br>
-
-		<label for="confidence">What percentage do you think you will get rigth</label>
-		<input type="number" value="<%= locals.confidence || "" %>" value="0" step="1" min="0" max="100" name="confidence">
-		<label for="confidence">%</label>
-
-		<br>
-
-		<input type="checkbox" name="acceptedTerms">
-		<label for="accept">By checking this check box you agree to participate</label>
-
-		<h3 stle="display-none">Hmmm</h3>
-		<br>
-
-		<button type="submit">Begin</button>
-	</form>
-
-	<br>
-	<h3><%= locals.error || "" %></h3>
+		<h3 class="centered"><%= locals.error || "" %></h3>
+	</div>
 </body>
 </html>

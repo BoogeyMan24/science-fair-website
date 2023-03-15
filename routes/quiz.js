@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
 		handleError(res, req, "noterms");
 		return;
 	}
-	if (format.test(req.body.fullName)) {
+	if (format.test(req.body.fullName) || req.body.fullName.toString().trim() == "") {
 		handleError(res, req, "invalidname");
 		return;
 	}
