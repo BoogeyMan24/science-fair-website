@@ -103,6 +103,9 @@ router.post("/submit", async (req, res) => {
 		if (userData == null) {
 			return;
 		}
+		if (userData.results != null) {
+			return;
+		}
 	}
 
 	delete req.body.id;

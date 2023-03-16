@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
 html {
 	overflow: hidden;
 	width: 100%;
 	height: 100%;
+
+	font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -15,56 +19,8 @@ body {
 }
 
 .div {
-	width: 25%;
-}
-
-.button-form {
-	padding-top: 10vh;
-}
-
-.button {
-	display: inline-block;
-	border-radius: 1000px;
-	background-color: #e3e3e3;
-	border: none;
-	color: #000000;
-	text-align: center;
-	font-size: 1.5rem;
-	padding: 1rem;
-	width: 16rem;
-
-	transition: all 0.5s;
-	cursor: pointer;
-	margin: 5px;
-}
-  
-.button span {
-	cursor: pointer;
-	display: inline-block;
-	position: relative;
-	transition: 0.5s;
-}
-  
-.button span:after {
-	content: '\00bb';
-	position: absolute;
-	opacity: 0;
-	top: 0;
-	right: -20px;
-	transition: 0.5s;
-}
-  
-.button:hover span {
-	padding-right: 25px;
-}
-  
-.button:hover span:after {
-	opacity: 1;
-	right: 0;
-}
-
-.button:hover {
-	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	width: 55%;
+	margin-bottom: 10vh;
 }
 
 .centered {
@@ -72,9 +28,42 @@ body {
 }
 
 .title {
-	font: 20rem;
+	font-size: 3em;
 }
 
-.description {
-	font: 20rem;
+/* .buttons {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+} */
+
+.button {
+	margin-top: 5vh;
+	width: 10vw;
+	height: 4vh;
+}
+
+.selected {
+	border: 2px solid rgb(49, 165, 236);
+  	border-radius: 5px;
+	box-shadow: 2px rgb(49, 165, 236);
+}
+
+.progress {
+	margin-top: 5vh;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+
+.page-unanswered {
+	color: black;
+}
+
+.page-answered {
+	color: rgb(49, 165, 236);
+}
+
+.page-current {
+	color: orange
 }

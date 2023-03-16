@@ -6,24 +6,56 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script defer src="/javascript/quizController.js"></script>
+	<link rel="stylesheet" href="/css/quiz.css">
 	<title>Document</title>
 </head>
 <body>
-	<h1>Quiz</h1>
-	<img onclick="updateImage()" src="/images/0.png" id="image" width="256" height="256">
-	<div onclick="toggleFake(this)">
-		<input type="checkbox" onclick="toggleFake(this)" id="fakeButton" value="fake"><label>Fake</label>
-	</div>
-	<div onclick="toggleReal(this)">
-		<input type="checkbox" onclick="toggleReal(this)" id="realButton" value="real"><label>Real</label>
-	</div>
+	<div class="div">
+		<h1 class="centered title">Quiz</h1>
+		<h5 class="centered" id="pageDisplay">Page <span id="page"></span> of <span id="pageLimit"></span></5h>
+		<div class="centered">
+			<img onclick="updateImage()" src="/images/0.png" id="image" width="332" height="332">
+		</div>
+		
+		<div class="centered buttons">
+			<button class="button" id="buttonFakeWrap" onclick="toggleFake(this)"><input type="checkbox" onclick="toggleFake(this)" id="fakeButton" style="display:none" value="fake"><label>Fake</label></button>
+			<button class="button" id="buttonRealWrap" onclick="toggleReal(this)"><input type="checkbox" onclick="toggleReal(this)" id="realButton" style="display:none" value="real"><label>Real</label></button>
+		</div>
 
-	<br>
-	<br>
-	<button onclick="backClick()" id="backButton">Back</button>
-	<button onclick="nextClick()" id="nextButton">Next</button>
-	<button onclick="submit(event)" id="submitButton" style="display:none">Confirm & Submit</button>
-	<h5 id="pageDisplay">Page <span id="page"></span> of <span id="pageLimit"></span></5h>
-	<h5 onclick="updateAnswerTracker()" id="answerTracker">Broken... click this to reload</5h>
+		<br>
+
+		<div class="centered">
+			<button onclick="backClick()" id="backButton"><</button>
+			<button onclick="nextClick()" id="nextButton">></button>
+		</div>
+		<div class="centered">
+			<button onclick="submit(event)" id="submitButton" style="display:none">Confirm & Submit</button>
+		</div>
+		
+		<!-- <h5 class="centered" onclick="updateAnswerTracker()" id="answerTracker">Broken... click this to reload</5h> -->
+		<div class="progress">
+			<div id="1">1</div>
+			<div id="2">2</div>
+			<div id="3">3</div>
+			<div id="4">4</div>
+			<div id="5">5</div>
+			<div id="6">6</div>
+			<div id="7">7</div>
+			<div id="8">8</div>
+			<div id="9">9</div>
+			<div id="10">10</div>
+			<div id="11">11</div>
+			<div id="12">12</div>
+			<div id="13">13</div>
+			<div id="14">14</div>
+			<div id="15">15</div>
+			<div id="16">16</div>
+			<div id="17">17</div>
+			<div id="18">18</div>
+			<div id="19">19</div>
+			<div id="20">20</div>
+		</div>
+		
+	</div>
 </body>
 </html>
