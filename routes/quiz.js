@@ -81,12 +81,15 @@ router.post("/", async (req, res) => {
 router.get("/thanks", async (req, res) => {
 	let userData;
 	if (req.query.form == null) {
+		res.redirect("/");
 		return;
 	} else {
 		userData = await userModel.findOne({ id: req.query.form });
 		if (userData == null) {
+			res.redirect("/");
 			return;
 		} else if (userData.results == null) {
+			res.redirect("/");
 			return;
 		}
 	}
@@ -97,13 +100,16 @@ router.get("/thanks", async (req, res) => {
 router.post("/submit", async (req, res) => {
 	let userData;
 	if (req.body.id == null) {
+		res.redirect("/");
 		return;
 	} else {
 		userData = await userModel.findOne({ id: req.body.id });
 		if (userData == null) {
+			res.redirect("/");
 			return;
 		}
 		if (userData.results != null) {
+			res.redirect("/");
 			return;
 		}
 	}

@@ -1,4 +1,6 @@
-const images = {
+// I am ashamed of this code
+
+const data = {
 	"0": { value: null },
 	"1": { value: null },
 	"2": { value: null },
@@ -19,13 +21,14 @@ const images = {
 	"17": { value: null },
 	"18": { value: null },
 	"19": { value: null },
+	response: null,
 	id: null,
 };
 
 const idLength = 20;
 
 let page = 0;
-const pageLimit = idLength - 1;
+const pageLimit = idLength;
 
 let realButton;
 let fakeButton;
@@ -45,6 +48,11 @@ $(window).load(function() {
 	check();
 });
 
+$("#input").on("input change keyup", function() {
+	data["response"] = (this.value == "" ? null : this.value);
+	allAnswered = true;
+	checkFinish();
+});
 
 
 function check() {
@@ -67,30 +75,39 @@ function check() {
 		submitButton.css("display", "none");
 	}
 
-	if (images[page].value == "real") {
-		setRealSelected();
-		setFakeUnselected();
-	} else if (images[page].value == "fake") {
-		setRealUnselected();
-		setFakeSelected();
-	} else {
-		setRealUnselected();
-		setFakeUnselected();
+	if(page != 20) {
+		if (data[page].value == "real") {
+			setRealSelected();
+			setFakeUnselected();
+		} else if (data[page].value == "fake") {
+			setRealUnselected();
+			setFakeSelected();
+		} else {
+			setRealUnselected();
+			setFakeUnselected();
+		}
 	}
 
-	$("#page").text(page + 1);
-	$("#pageLimit").text(pageLimit + 1);
-
-	updateImage();
-
 	updateAnswerTracker();
+
+	if (page != 20) {
+		updateImage();
+	} else {
+		showInput();
+	}
+}
+
+function showInput() {
+	imageElement.css("display", "none");
+	$("#buttons").css("display", "none");
+	$("#inputdiv").css("display", "inline");
 }
 
 let allAnswered = true;
 
 function backClick() {
 	if (page - 1 < 0) { return; } // USELESS LINE (INCASE SOMEONE RUN backClick() from console)
-	saveAnswer();
+	if (page != 20) { saveAnswer(); }
 	page--;
 	check();
 }
@@ -123,8 +140,12 @@ function setRealUnselected() {
 }
 
 function checkFinish() {
-	for (let i = 0; i <= pageLimit; i++) {
-		if (images[i].value == null) {
+	for (let i = 0; i < idLength; i++) {
+		if (data["response"] == null || data["response"] == "") {
+			allAnswered = false;
+			break;
+		}
+		if (data[i].value == null) {
 			allAnswered = false;
 		}
 	}
@@ -148,9 +169,10 @@ function toggleFake() {
 		setFakeSelected();
 	}
 
-	saveAnswer();
 	if (page == pageLimit) {
 		checkFinish();
+	} else {
+		saveAnswer();
 	}
 }
 
@@ -165,9 +187,10 @@ function toggleReal() {
 		setRealSelected();
 	}
 
-	saveAnswer();
 	if (page == pageLimit) {
 		checkFinish();
+	} else {
+		saveAnswer();
 	}
 }
 
@@ -176,27 +199,36 @@ const prefix = "/images/";
 const suffix = ".png";
 
 function updateImage() {
+	$("#buttons").css("display", "block");
+	$("#inputdiv").css("display", "none");
+	imageElement.css("display", "inline");
 	imageElement.prop("src", prefix + page + suffix);
 }
 
 function saveAnswer() {
 	allAnswered = true;
 	if (realButton.prop("checked")) {
-		images[page].value = "real";
+		data[page].value = "real";
 	} else if (fakeButton.prop("checked")) {
-		images[page].value = "fake";
+		data[page].value = "fake";
 	} else {
-		images[page].value = null;
+		data[page].value = null;
 	}
 }
 
 function updateAnswerTracker() {
 	let bar = null;
-	for (let i = 0; i <= pageLimit; i++) {
+	for (let i = 0; i <= idLength; i++) {
 		$(`#${i+1}`).removeClass();
 		if (page == i) {
 			$(`#${i+1}`).addClass("page-current");
-		} else if (images[i].value == null) {
+		} else if (i == idLength) {
+			if (data["response"] == null || data["response"] == "") {
+				$(`#${i+1}`).addClass("page-unanswered");
+			} else {
+				$(`#${i+1}`).addClass("page-answered");
+			}
+		} else if (data[i].value == null) {
 			$(`#${i+1}`).addClass("page-unanswered");
 		} else {
 			$(`#${i+1}`).addClass("page-answered");
@@ -208,19 +240,20 @@ function submit(e) {
 	/* stop form from submitting normally */
 	e.preventDefault();
 
-	const data = images;
+	const datas = data;
 	data.id = (window.location.href).slice((window.location.href).length - idLength - 1);
 	$.ajax({
 		url: `/quiz/submit`,
 		type: "POST",
 		contentType: "application/json",
 		dataType: "json",
-		data: JSON.stringify(data),
+		data: JSON.stringify(datas),
 		success: function(data) {
 			console.log("success returned in ajax");
 		},
 		error: function(xhr, status, error) {
 			console.log("failure");
+			window.location.replace("/");
 		},
 	}).done(() => {
 		window.location.href = `/quiz/thanks?form=${(window.location.href).slice((window.location.href).length - idLength - 1)}`;

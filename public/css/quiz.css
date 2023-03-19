@@ -67,3 +67,7 @@ body {
 .page-current {
 	color: orange
 }
+
+#input {
+	width: 45%;
+}
