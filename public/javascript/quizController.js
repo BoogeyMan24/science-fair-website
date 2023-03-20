@@ -256,6 +256,6 @@ function submit(e) {
 			window.location.replace("/");
 		},
 	}).done(() => {
-		window.location.href = `/quiz/thanks?form=${(window.location.href).slice((window.location.href).length - idLength - 1)}`;
+		window.location.replace(`/quiz/thanks?form=${(window.location.href).slice((window.location.href).length - idLength - 1)}`);
 	});
 }
