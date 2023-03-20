@@ -45,16 +45,8 @@ $(window).load(function() {
 	nextButton = $("#nextButton");
 	submitButton = $("#submitButton");
 	imageElement = $("#image");
-	preloadImages();
 	check();
 });
-
-function preloadImages(url) {
-	for (let i = 0; i < idLength; i++) {
-		const img = new Image();
-		img.src = prefix + i + suffix;
-	}
-}
 
 $("#input").on("input change keyup", function() {
 	data["response"] = (this.value == "" ? null : this.value);
