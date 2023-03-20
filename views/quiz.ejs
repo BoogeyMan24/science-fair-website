@@ -7,26 +7,26 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script defer src="/javascript/quizController.js"></script>
 	<link rel="stylesheet" href="/css/quiz.css">
-	<link rel="preload" href="/images/0.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/1.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/2.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/3.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/4.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/5.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/6.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/7.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/8.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/9.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/10.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/11.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/12.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/13.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/14.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/15.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/16.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/17.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/18.png" as="image" fetchpriority="high">
-	<link rel="preload" href="/images/19.png" as="image" fetchpriority="high">
+	<link rel="preload" href="/images/0.png" as="image" fetchpriority="high" crossorigin>
+	<link rel="preload" href="/images/1.png" as="image" fetchpriority="high" crossorigin>
+	<link rel="preload" href="/images/2.png" as="image" fetchpriority="high" crossorigin>
+	<link rel="preload" href="/images/3.png" as="image" fetchpriority="high" crossorigin>
+	<link rel="preload" href="/images/4.png" as="image" fetchpriority="high" crossorigin>
+	<link rel="preload" href="/images/5.png" as="image" fetchpriority="high" crossorigin>
+	<link rel="preload" href="/images/6.png" as="image" fetchpriority="low" crossorigin>
+	<link rel="preload" href="/images/7.png" as="image" fetchpriority="low" crossorigin>
+	<link rel="preload" href="/images/8.png" as="image" fetchpriority="low" crossorigin>
+	<link rel="preload" href="/images/9.png" as="image" fetchpriority="low" crossorigin>
+	<link rel="preload" href="/images/10.png" as="image" fetchpriority="low" crossorigin>
+	<link rel="preload" href="/images/11.png" as="image" fetchpriority="low" crossorigin>
+	<link rel="preload" href="/images/12.png" as="image" fetchpriority="low" crossorigin>
+	<link rel="preload" href="/images/13.png" as="image" fetchpriority="low" crossorigin>
+	<link rel="preload" href="/images/14.png" as="image" fetchpriority="low" crossorigin>
+	<link rel="preload" href="/images/15.png" as="image" fetchpriority="low" crossorigin>
+	<link rel="preload" href="/images/16.png" as="image" fetchpriority="low" crossorigin>
+	<link rel="preload" href="/images/17.png" as="image" fetchpriority="low" crossorigin>
+	<link rel="preload" href="/images/18.png" as="image" fetchpriority="low" crossorigin>
+	<link rel="preload" href="/images/19.png" as="image" fetchpriority="low" crossorigin>
 	<title>Quiz | Science Fair</title>
 </head>
 <body>
@@ -34,6 +34,7 @@
 		<h1 class="centered title">Quiz</h1>
 		<div class="centered">
 			<img onclick="updateImage()" src="/images/0.png" id="image" width="332" height="332">
+			<h5 class="centered longerLoad" id="longerLoad">Some images may take longer to load</h5>
 			<div id="inputdiv" style="display:none">
 				<h4>What did you use to answer?</h4>
 				<textarea id="input"></textarea>

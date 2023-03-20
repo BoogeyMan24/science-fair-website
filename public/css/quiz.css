@@ -68,6 +68,10 @@ body {
 	color: orange
 }
 
+.longerLoad {
+	margin: 0;
+}
+
 #input {
 	width: 45%;
 }

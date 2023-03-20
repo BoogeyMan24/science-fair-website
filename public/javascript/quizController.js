@@ -99,6 +99,7 @@ function check() {
 
 function showInput() {
 	imageElement.css("display", "none");
+	$("#longerLoad").css("display", "none");
 	$("#buttons").css("display", "none");
 	$("#inputdiv").css("display", "inline");
 }
@@ -199,6 +200,7 @@ const prefix = "/images/";
 const suffix = ".png";
 
 function updateImage() {
+	$("#longerLoad").css("display", "block");
 	$("#buttons").css("display", "block");
 	$("#inputdiv").css("display", "none");
 	imageElement.css("display", "inline");
