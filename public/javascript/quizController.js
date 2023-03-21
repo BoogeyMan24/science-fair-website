@@ -206,7 +206,7 @@ function checkFinish() {
 		}
 	}
 	submitButton.css("display", "inline");
-	if (allAnswered || !allAnswered) {
+	if (allAnswered) {
 		submitButton.prop("disabled", false);
 		submitButton.text("Confirm & Submit");
 	} else {
