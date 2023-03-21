@@ -2,34 +2,34 @@
 
 const data = {
 	"images": {
-		"0": { value: null },
-		"1": { value: null },
-		"2": { value: null },
-		"3": { value: null },
-		"4": { value: null },
-		"5": { value: null },
-		"6": { value: null },
-		"7": { value: null },
-		"8": { value: null },
-		"9": { value: null },
-		"10": { value: null },
-		"11": { value: null },
-		"12": { value: null },
-		"13": { value: null },
-		"14": { value: null },
-		"15": { value: null },
-		"16": { value: null },
-		"17": { value: null },
-		"18": { value: null },
-		"19": { value: null },
+		"0": { value: null, timeSpent: 0 },
+		"1": { value: null, timeSpent: 0 },
+		"2": { value: null, timeSpent: 0 },
+		"3": { value: null, timeSpent: 0 },
+		"4": { value: null, timeSpent: 0 },
+		"5": { value: null, timeSpent: 0 },
+		"6": { value: null, timeSpent: 0 },
+		"7": { value: null, timeSpent: 0 },
+		"8": { value: null, timeSpent: 0 },
+		"9": { value: null, timeSpent: 0 },
+		"10": { value: null, timeSpent: 0 },
+		"11": { value: null, timeSpent: 0 },
+		"12": { value: null, timeSpent: 0 },
+		"13": { value: null, timeSpent: 0 },
+		"14": { value: null, timeSpent: 0 },
+		"15": { value: null, timeSpent: 0 },
+		"16": { value: null, timeSpent: 0 },
+		"17": { value: null, timeSpent: 0 },
+		"18": { value: null, timeSpent: 0 },
+		"19": { value: null, timeSpent: 0 },
 	},
 	"poems": {
-		"0": { value: null },
-		"1": { value: null },
-		"2": { value: null },
-		"3": { value: null },
-		"4": { value: null },
-		"5": { value: null },
+		"0": { value: null, timeSpent: 0 },
+		"1": { value: null, timeSpent: 0 },
+		"2": { value: null, timeSpent: 0 },
+		"3": { value: null, timeSpent: 0 },
+		"4": { value: null, timeSpent: 0 },
+		"5": { value: null, timeSpent: 0 },
 	},
 	response: null,
 	id: null,
@@ -51,6 +51,8 @@ let nextButton;
 let submitButton;
 let imageElement;
 
+let date = 0;
+let endDate = 0;
 
 $(window).load(function() {
 	realButton = $("#realButton");
@@ -77,6 +79,7 @@ function check() {
 		page = pageLimit;
 		check();
 	}
+	date = new Date();
 
 	if (page == 0) {
 		backButton.prop("disabled", true);
@@ -152,6 +155,7 @@ let allAnswered = true;
 
 function backClick() {
 	if (page - 1 < 0) { return; } // USELESS LINE (INCASE SOMEONE RUN backClick() from console)
+	endDate = new Date();
 	if (page != idLength) { saveAnswer(); }
 	page--;
 	check();
@@ -159,6 +163,7 @@ function backClick() {
 
 function nextClick() {
 	if (page + 1 > pageLimit) { return; } // USELESS LINE (INCASE SOMEONE RUN nextClick() from console)
+	endDate = new Date();
 	saveAnswer();
 	page++;
 	check();
@@ -201,7 +206,7 @@ function checkFinish() {
 		}
 	}
 	submitButton.css("display", "inline");
-	if (allAnswered) {
+	if (allAnswered || !allAnswered) {
 		submitButton.prop("disabled", false);
 		submitButton.text("Confirm & Submit");
 	} else {
@@ -255,6 +260,7 @@ function saveAnswer() {
 		} else {
 			data["images"][page].value = null;
 		}
+		data["images"][page].timeSpent += endDate - date;
 	} else if (page >= imageLength && page < idLength) {
 		if (realButton.prop("checked")) {
 			data["poems"][page - imageLength].value = "real";
@@ -263,6 +269,7 @@ function saveAnswer() {
 		} else {
 			data["poems"][page - imageLength].value = null;
 		}
+		data["poems"][page - imageLength].timeSpent += endDate - date;
 	}
 }
 
