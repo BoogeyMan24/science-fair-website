@@ -1,31 +1,45 @@
 // I am ashamed of this code
 
 const data = {
-	"0": { value: null },
-	"1": { value: null },
-	"2": { value: null },
-	"3": { value: null },
-	"4": { value: null },
-	"5": { value: null },
-	"6": { value: null },
-	"7": { value: null },
-	"8": { value: null },
-	"9": { value: null },
-	"10": { value: null },
-	"11": { value: null },
-	"12": { value: null },
-	"13": { value: null },
-	"14": { value: null },
-	"15": { value: null },
-	"16": { value: null },
-	"17": { value: null },
-	"18": { value: null },
-	"19": { value: null },
+	"images": {
+		"0": { value: null },
+		"1": { value: null },
+		"2": { value: null },
+		"3": { value: null },
+		"4": { value: null },
+		"5": { value: null },
+		"6": { value: null },
+		"7": { value: null },
+		"8": { value: null },
+		"9": { value: null },
+		"10": { value: null },
+		"11": { value: null },
+		"12": { value: null },
+		"13": { value: null },
+		"14": { value: null },
+		"15": { value: null },
+		"16": { value: null },
+		"17": { value: null },
+		"18": { value: null },
+		"19": { value: null },
+	},
+	"poems": {
+		"0": { value: null },
+		"1": { value: null },
+		"2": { value: null },
+		"3": { value: null },
+		"4": { value: null },
+		"5": { value: null },
+	},
 	response: null,
 	id: null,
 };
 
-const idLength = 20;
+const imageLength = 20;
+const poemLength = 6;
+const idLength = imageLength + poemLength;
+
+const idLengths = 20;
 
 let page = 0;
 const pageLimit = idLength;
@@ -75,11 +89,11 @@ function check() {
 		submitButton.css("display", "none");
 	}
 
-	if(page != 20) {
-		if (data[page].value == "real") {
+	if (page != idLength) {
+		if (data["images"][page]?.value == "real" || data["poems"][page - imageLength]?.value == "real") {
 			setRealSelected();
 			setFakeUnselected();
-		} else if (data[page].value == "fake") {
+		} else if (data["images"][page]?.value == "fake" || data["poems"][page - imageLength]?.value == "fake") {
 			setRealUnselected();
 			setFakeSelected();
 		} else {
@@ -90,8 +104,12 @@ function check() {
 
 	updateAnswerTracker();
 
-	if (page != 20) {
-		updateImage();
+	if (page != idLength) {
+		if (page < imageLength) {
+			updateImage();
+		} else {
+			updatePoem();
+		}
 	} else {
 		showInput();
 	}
@@ -99,16 +117,42 @@ function check() {
 
 function showInput() {
 	imageElement.css("display", "none");
+	$("#poem").css("display", "none");
 	$("#longerLoad").css("display", "none");
 	$("#buttons").css("display", "none");
 	$("#inputdiv").css("display", "inline");
+	$("#input").html((data["response"] == null ? "" : data["response"]));
 }
+
+const prefix = "/images/";
+const suffix = ".png";
+
+function updateImage() {
+	$("#longerLoad").css("display", "block");
+	$("#buttons").css("display", "block");
+	$("#inputdiv").css("display", "none");
+	$("#poem").css("display", "none")
+	imageElement.css("display", "inline");
+	imageElement.prop("src", prefix + page + suffix);
+}
+
+async function updatePoem() {
+	const poems = await fetch("/poems/poems.json").then((response) => response.json());
+
+	$("#longerLoad").css("display", "none");
+	$("#inputdiv").css("display", "none");
+	imageElement.css("display", "none");
+	$("#buttons").css("display", "block");
+	$("#poem").css("display", "inline");
+	$("#poem").html("<span style=\"font-size: 2.4vh\"> " + poems[page - imageLength].name + "</span> <br><br> <span style=\"font-size: 1.8vh\"> " + poems[page - imageLength].poem + "</span>");
+}
+
 
 let allAnswered = true;
 
 function backClick() {
 	if (page - 1 < 0) { return; } // USELESS LINE (INCASE SOMEONE RUN backClick() from console)
-	if (page != 20) { saveAnswer(); }
+	if (page != idLength) { saveAnswer(); }
 	page--;
 	check();
 }
@@ -146,8 +190,14 @@ function checkFinish() {
 			allAnswered = false;
 			break;
 		}
-		if (data[i].value == null) {
-			allAnswered = false;
+		if (i < imageLength) {
+			if (data["images"][i].value == null) {
+				allAnswered = false;
+			}
+		} else if (i >= imageLength && i < idLength) {
+			if (data["poems"][i - imageLength].value == null) {
+				allAnswered = false;
+			}
 		}
 	}
 	submitButton.css("display", "inline");
@@ -195,26 +245,24 @@ function toggleReal() {
 	}
 }
 
-
-const prefix = "/images/";
-const suffix = ".png";
-
-function updateImage() {
-	$("#longerLoad").css("display", "block");
-	$("#buttons").css("display", "block");
-	$("#inputdiv").css("display", "none");
-	imageElement.css("display", "inline");
-	imageElement.prop("src", prefix + page + suffix);
-}
-
 function saveAnswer() {
 	allAnswered = true;
-	if (realButton.prop("checked")) {
-		data[page].value = "real";
-	} else if (fakeButton.prop("checked")) {
-		data[page].value = "fake";
-	} else {
-		data[page].value = null;
+	if (page < imageLength) {
+		if (realButton.prop("checked")) {
+			data["images"][page].value = "real";
+		} else if (fakeButton.prop("checked")) {
+			data["images"][page].value = "fake";
+		} else {
+			data["images"][page].value = null;
+		}
+	} else if (page >= imageLength && page < idLength) {
+		if (realButton.prop("checked")) {
+			data["poems"][page - imageLength].value = "real";
+		} else if (fakeButton.prop("checked")) {
+			data["poems"][page - imageLength].value = "fake";
+		} else {
+			data["poems"][page - imageLength].value = null;
+		}
 	}
 }
 
@@ -230,10 +278,18 @@ function updateAnswerTracker() {
 			} else {
 				$(`#${i+1}`).addClass("page-answered");
 			}
-		} else if (data[i].value == null) {
-			$(`#${i+1}`).addClass("page-unanswered");
-		} else {
-			$(`#${i+1}`).addClass("page-answered");
+		} else if (i < imageLength) {
+			if (data["images"][i].value == null) {
+				$(`#${i+1}`).addClass("page-unanswered");
+			} else {
+				$(`#${i+1}`).addClass("page-answered");
+			}
+		} else if (i >= imageLength && i < idLength) {
+			if (data["poems"][i - imageLength].value == null) {
+				$(`#${i+1}`).addClass("page-unanswered");
+			} else {
+				$(`#${i+1}`).addClass("page-answered");
+			}
 		}
 	}
 }
@@ -243,7 +299,7 @@ function submit(e) {
 	e.preventDefault();
 
 	const datas = data;
-	data.id = (window.location.href).slice((window.location.href).length - idLength - 1);
+	data.id = (window.location.href).slice((window.location.href).length - idLengths - 1);
 	$.ajax({
 		url: `/quiz/submit`,
 		type: "POST",
@@ -258,6 +314,6 @@ function submit(e) {
 			window.location.replace("/");
 		},
 	}).done(() => {
-		window.location.replace(`/quiz/thanks?form=${(window.location.href).slice((window.location.href).length - idLength - 1)}`);
+		window.location.replace(`/quiz/thanks?form=${(window.location.href).slice((window.location.href).length - idLengths - 1)}`);
 	});
 }
