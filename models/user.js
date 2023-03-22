@@ -8,7 +8,7 @@ const schema = new Schema(
 		acceptedTerms: { type: Boolean, default: false, require: true },
 
 		fullName: { type: String, require: true, unique: true },
-		class: { type: Number, require: true },
+		class: { type: String, require: true },
 		age: { type: Number, require: true },
 		confidence: { type: Number, require: true },
 

@@ -70,7 +70,7 @@ router.post("/", async (req, res) => {
 			acceptedTerms: (req.body.acceptedTerms == "on" ? true : false),
 
 			fullName: req.body.fullName.trim().replace(/\s+/g, "-").toLowerCase(),
-			class: req.body.class,
+			class: req.body.toString(),
 			age: req.body.age,
 			confidence: req.body.confidence,
 		});
