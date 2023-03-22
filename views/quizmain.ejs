@@ -24,13 +24,14 @@
 				<label for="class">Class</label>
 				<br>
 				<select id="class" name="class">
-					<option value="7">12 yo</option>
-					<option value="8">13 yo</option>
-					<option selected="selected" value="9">Sec 1</option>
-					<option value="10">Sec 2</option>
-					<option value="11">Sec 3</option>
-					<option value="12">Sec 4</option>
-					<option value="teacher">Teacher</option>
+					<option <%= ( locals.selected == null || locals.selected == "none" ? "selected" : "")%> value="none">Pick Class</option>
+					<option <%= ( locals.selected == "7" ? "selected" : "") %> value="7">12 yo</option>
+					<option <%= ( locals.selected == "8" ? "selected" : "") %> value="8">13 yo</option>
+					<option <%= ( locals.selected == "9" ? "selected" : "") %> value="9">Sec 1</option>
+					<option <%= ( locals.selected == "10" ? "selected" : "" )%> value="10">Sec 2</option>
+					<option <%= ( locals.selected == "11" ? "selected" : "") %> value="11">Sec 3</option>
+					<option <%= ( locals.selected == "12" ? "selected" : "") %> value="12">Sec 4</option>
+					<option <%= ( locals.selected == "teacher" ? "selected" : "") %> value="teacher">Teacher</option>
 				</select>
 			</div>
 			

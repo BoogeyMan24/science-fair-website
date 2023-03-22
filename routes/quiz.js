@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
 	}
 	try {
 		const age = parseInt(req.body.age);
-		if (age < 1 || age > 100) {
+		if (age < 1 || age > 100 || age == null || isNaN(age)) {
 			handleError(res, req, "invalidage");
 			return;
 		}
@@ -50,12 +50,17 @@ router.post("/", async (req, res) => {
 	}
 	try {
 		const confidence = parseInt(req.body.confidence);
-		if (confidence < 0 || confidence > 100) {
+		if (confidence < 0 || confidence > 100 || confidence == null || isNaN(confidence)) {
 			handleError(res, req, "invalidconfidence");
 			return;
 		}
 	} catch (e) {
 		handleError(res, req, "invalidconfidence");
+		return;
+	}
+
+	if (req.body.class == "none" || req.body.class == null) {
+		handleError(res, req, "invalidclass");
 		return;
 	}
 
@@ -149,7 +154,7 @@ function handleError(res, req, error) {
 		errorMsg = "Invalid name. Make sure the name field doesn't have any special characters.";
 		break;
 	case "invalidclass":
-		errorMsg = "Invalid class. The only valid classes are grade 7-12.";
+		errorMsg = "Invalid class. The only valid classes are grade 7-12. Make sure one is selected.";
 		break;
 	case "invalidage":
 		errorMsg = "Invalid age. Make sure the age field is a number and that it is between 1 and 99.";
@@ -159,7 +164,7 @@ function handleError(res, req, error) {
 		break;
 	}
 
-	res.render("quizmain.ejs", { error: errorMsg, fullName: req.body.fullName, class: req.body.class, age: req.body.age, confidence: req.body.confidence });
+	res.render("quizmain.ejs", { error: errorMsg, fullName: req.body.fullName, selected: req.body.class, age: req.body.age, confidence: req.body.confidence });
 }
 
 function createRandomId() {
