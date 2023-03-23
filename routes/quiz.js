@@ -6,6 +6,8 @@ const path = require("path");
 
 const idLength = 20;
 
+const verified = true;
+
 router.get("/", async (req, res) => {
 	res.render("quizmain.ejs");
 });
@@ -68,6 +70,7 @@ router.post("/", async (req, res) => {
 		const user = await userModel.create({
 			id: id,
 			acceptedTerms: (req.body.acceptedTerms == "on" ? true : false),
+			verified: verified,
 
 			fullName: req.body.fullName.trim().replace(/\s+/g, "-").toLowerCase(),
 			class: req.body.class.toString(),

@@ -6,6 +6,7 @@ const schema = new Schema(
 	{
 		id: { type: String, require: true, unique: true },
 		acceptedTerms: { type: Boolean, default: false, require: true },
+		verified: { type: Boolean, default: false },
 
 		fullName: { type: String, require: true, unique: true },
 		class: { type: String, require: true },
