@@ -38,9 +38,11 @@ db.on("error", error => console.log(error));
 /* --------------------DEAL WITH APP ROUTES-------------------- */
 const indexRouter = require("./routes/index.js");
 const quizRouter = require("./routes/quiz.js");
+const userRouter = require("./routes/user.js");
 
 app.use("/", indexRouter);
 app.use("/quiz", quizRouter);
+app.use("/user", userRouter);
 
 
 app.listen(process.env.PORT);

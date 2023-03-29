@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
 });
 
 const format = /[`0123456789!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
+
 router.post("/", async (req, res) => {
 	const id = createRandomId();
 

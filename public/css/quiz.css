@@ -31,12 +31,6 @@ body {
 	font-size: 3em;
 }
 
-/* .buttons {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-} */
-
 .button {
 	margin-top: 5vh;
 	width: 10vw;

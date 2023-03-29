@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script>
+		const fakeAnswers = JSON.parse(<%- answers %>);
+		const userData = <%- userData %>;
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script defer src="/javascript/userResultsController.js"></script>
+	<link rel="stylesheet" href="/css/user.css">
+	<link rel="preload" href="/images/0.png" as="image" fetchpriority="high">
+	<link rel="preload" href="/images/1.png" as="image" fetchpriority="high">
+	<link rel="preload" href="/images/2.png" as="image" fetchpriority="high">
+	<link rel="preload" href="/images/3.png" as="image" fetchpriority="high">
+	<link rel="preload" href="/images/4.png" as="image" fetchpriority="high">
+	<link rel="preload" href="/images/5.png" as="image" fetchpriority="high">
+	<link rel="preload" href="/images/6.png" as="image" fetchpriority="low">
+	<link rel="preload" href="/images/7.png" as="image" fetchpriority="low">
+	<link rel="preload" href="/images/8.png" as="image" fetchpriority="low">
+	<link rel="preload" href="/images/9.png" as="image" fetchpriority="low">
+	<link rel="preload" href="/images/10.png" as="image" fetchpriority="low">
+	<link rel="preload" href="/images/11.png" as="image" fetchpriority="low">
+	<link rel="preload" href="/images/12.png" as="image" fetchpriority="low">
+	<link rel="preload" href="/images/13.png" as="image" fetchpriority="low">
+	<link rel="preload" href="/images/14.png" as="image" fetchpriority="low">
+	<link rel="preload" href="/images/15.png" as="image" fetchpriority="low">
+	<link rel="preload" href="/images/16.png" as="image" fetchpriority="low">
+	<link rel="preload" href="/images/17.png" as="image" fetchpriority="low">
+	<link rel="preload" href="/images/18.png" as="image" fetchpriority="low">
+	<link rel="preload" href="/images/19.png" as="image" fetchpriority="low">
+	<title>User Results | Science Fair</title>
+</head>
+<body>
+	<div class="outer">
+		<div class="title-container">
+			<div class="title-wrapper">
+				<h1 class="title">Results</h1>
+				<h4 class="subtitle"><i><%= locals.id%></i></h4>
+			</div>
+			<div class="results">
+				<h3 class="correct-title" >You got <span id="correctNum"></span> / 26</h3>
+				<h3 class="correct-subtitle"><span id="correctPercentage"></span>% actually correct</h3>
+				<h3 class="correct-subtitle"><span id="correctPercentageConfidence"></span>% confidence</h3>
+			</div>
+		</div>
+		<div class="container-outer">
+			<div class="container">
+				<div class="outer-question centered">
+					<img src="/images/0.png" class="image" id="image" width="318" height="318">
+					<h3 id="poem" class="lineheight" style="display:none">poem</h3>
+					<h4 class="centered timespent" id="timespentOuter">Time spent: <span id="timespent"></span></h4>
+				</div>
+				<div class="centered buttons" id="buttons">
+					<button class="button" id="buttonFakeWrap"><input type="checkbox" id="fakeButton" style="display:none"><label>Fake</label></button>
+					<button class="button" id="buttonRealWrap"><input type="checkbox" id="realButton" style="display:none"><label>Real</label></button>
+				</div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<div class="next-prev centered">
+			<button onclick="prevPage()" id="prevButton"><</button>
+			<button onclick="nextPage()" id="nextButton">></button>
+		</div>
+
+		<div class="progress">
+			<div class="pageProgress" id="1" onclick="updatePageNum(1)">1</div>
+			<div class="pageProgress" id="2" onclick="updatePageNum(2)">2</div>
+			<div class="pageProgress" id="3" onclick="updatePageNum(3)">3</div>
+			<div class="pageProgress" id="4" onclick="updatePageNum(4)">4</div>
+			<div class="pageProgress" id="5" onclick="updatePageNum(5)">5</div>
+			<div class="pageProgress" id="6" onclick="updatePageNum(6)">6</div>
+			<div class="pageProgress" id="7" onclick="updatePageNum(7)">7</div>
+			<div class="pageProgress" id="8" onclick="updatePageNum(8)">8</div>
+			<div class="pageProgress" id="9" onclick="updatePageNum(9)">9</div>
+			<div class="pageProgress" id="10" onclick="updatePageNum(10)">10</div>
+			<div class="pageProgress" id="11" onclick="updatePageNum(11)">11</div>
+			<div class="pageProgress" id="12" onclick="updatePageNum(12)">12</div>
+			<div class="pageProgress" id="13" onclick="updatePageNum(13)">13</div>
+			<div class="pageProgress" id="14" onclick="updatePageNum(14)">14</div>
+			<div class="pageProgress" id="15" onclick="updatePageNum(15)">15</div>
+			<div class="pageProgress" id="16" onclick="updatePageNum(16)">16</div>
+			<div class="pageProgress" id="17" onclick="updatePageNum(17)">17</div>
+			<div class="pageProgress" id="18" onclick="updatePageNum(18)">18</div>
+			<div class="pageProgress" id="19" onclick="updatePageNum(19)">19</div>
+			<div class="pageProgress" id="20" onclick="updatePageNum(20)">20</div>
+			<div class="pageProgress" id="21" onclick="updatePageNum(21)">21</div>
+			<div class="pageProgress" id="22" onclick="updatePageNum(22)">22</div>
+			<div class="pageProgress" id="23" onclick="updatePageNum(23)">23</div>
+			<div class="pageProgress" id="24" onclick="updatePageNum(24)">24</div>
+			<div class="pageProgress" id="25" onclick="updatePageNum(25)">25</div>
+			<div class="pageProgress" id="26" onclick="updatePageNum(26)">26</div>
+		</div>
+		
+	</div>
+</body>
+</html>

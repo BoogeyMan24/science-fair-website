@@ -1,5 +1,3 @@
-// I am ashamed of this code
-
 const data = {
 	"images": {
 		"0": { value: null, timeSpent: 0 },
