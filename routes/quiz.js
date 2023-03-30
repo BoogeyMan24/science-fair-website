@@ -6,7 +6,7 @@ const path = require("path");
 
 const idLength = 20;
 
-const verified = true;
+const verified = false;
 
 router.get("/", async (req, res) => {
 	res.render("quizmain.ejs");

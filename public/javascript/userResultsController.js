@@ -1,7 +1,7 @@
 let page = 1;
-let numOfImages = 20;
-let numOfPoems = 6;
-let numOfPages = numOfImages + numOfPoems;
+const numOfImages = 20;
+const numOfPoems = 6;
+const numOfPages = numOfImages + numOfPoems;
 
 let mode = "images";
 
@@ -108,7 +108,7 @@ let numOfCorrect = 0;
 function getNumOfCorrect() {
 	numOfCorrect = 0;
 	for (let i = 1; i <= numOfPages; i++) {
-		let localMode = i <= numOfImages ? "images" : "poems";
+		const localMode = i <= numOfImages ? "images" : "poems";
 		if (userData.results[localMode][(i <= numOfImages ? i : i - numOfImages) - 1].value == fakeAnswers[localMode][(i <= numOfImages ? i : i - numOfImages) - 1]) {
 			numOfCorrect++;
 		}
@@ -118,7 +118,7 @@ function getNumOfCorrect() {
 
 function setProgress() {
 	for (let i = 1; i <= numOfPages; i++) {
-		let localMode = i <= numOfImages ? "images" : "poems";
+		const localMode = i <= numOfImages ? "images" : "poems";
 		if (i == 1) {
 			$(`#${i}`).css("color", "rgb(255, 153, 0)");
 		} else if (userData.results[localMode][(i <= numOfImages ? i : i - numOfImages) - 1].value == fakeAnswers[localMode][(i <= numOfImages ? i : i - numOfImages) - 1]) {
@@ -131,8 +131,8 @@ function setProgress() {
 
 function updateProgress() {
 	for (let i = 0; i < 3; i++) {
-		let current = (page + 1) - i;
-		let localMode = current < numOfImages ? "images" : "poems";
+		const current = (page + 1) - i;
+		const localMode = current < numOfImages ? "images" : "poems";
 		if (userData.results[localMode][(current < numOfImages ? current : current - numOfImages) - 1] != null) {
 			if (current == page) {
 				$(`#${current}`).css("color", "rgb(255, 153, 0)");
@@ -142,7 +142,7 @@ function updateProgress() {
 				$(`#${current}`).css("color", "rgb(255, 0, 0)");
 			}
 		}
- 	}
+	}
 }
 
 function unsetFakeReal() {

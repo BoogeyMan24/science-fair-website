@@ -254,7 +254,6 @@ function saveAnswer() {
 		} else {
 			data["images"][page].value = null;
 		}
-		console.log("Date: " + date);
 		data["images"][page].timeSpent += endDate - date;
 	} else if (page >= imageLength && page < idLength) {
 		if (realButton.prop("checked")) {
