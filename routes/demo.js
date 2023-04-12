@@ -31,7 +31,7 @@ router.post("/submit", async (req, res) => {
 router.get("/results/:id", async (req, res) => {
 	let userData = await demoModel.findOne({ id: req.params.id });
 	if (!userData) {
-		res.redirect("/demo");
+		// res.redirect("/demo");
 		return;
 	}
 	userData = { id: userData.id, acceptedTerms: userData.acceptedTerms, verified: userData.verified, fullName: userData.fullName, class: userData.class, age: userData.age, confidence: userData.confidence, results: userData.results };
