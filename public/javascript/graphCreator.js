@@ -5,7 +5,17 @@ const numOfPages = numOfImages + numOfPoems;
 
 $(window).load(function() {
 	// let xyValues = getTimeVSAccuracyDataPoems();
+	let xyConfidenceAccuracy = getConfideceVSAccuracyData();
+	let xyConfidenceAccuracyImages = getConfideceVSAccuracyDataImages();
+	let xyConfidenceAccuracyPoems = getConfideceVSAccuracyDataPoems();
+
+	let xyTimeAccuracy = getTimeVSAccuracyData();
+	let xyTimeAccuracyImages = getTimeVSAccuracyDataImages();
+	let xyTimeAccuracyPoems = getTimeVSAccuracyDataPoems();
+
 	let yValues = getAccuracyAvgForEachPage();
+
+
 
 	const backgroundColor = [];
 	for (let i = 0; i < numOfPages; i++) {
@@ -25,7 +35,123 @@ $(window).load(function() {
 		borderColor.push(((answers[localMode][(i < numOfImages ? i : i - numOfImages)]) == "real" ? "rgba(30, 126, 235, 0.8)" : "rgba(235, 64, 52, 0.8)"));
 	}
 
-	new Chart("myChart", {
+
+
+	new Chart("confidenceaccuracy", {
+		type: "scatter",
+		data: {
+			datasets: [{
+				pointRadius: 4,
+				pointBackgroundColor: "rgb(0,0,255)",
+				data: xyConfidenceAccuracy,
+			}],
+		},
+		options: {
+			legend: { display: false },
+			scales: {
+				xAxes: [{ ticks: { min: 0, max: 100 }, scaleLabel: { display: true, labelString: "Accuracy (Percentage %)" } }],
+				yAxes: [{ ticks: { min: 0, max: 100 }, scaleLabel: { display: true, labelString: "Confidence (Percentage %)" } }],
+			},
+			showLines: false,
+		},
+	});
+
+	new Chart("confidenceaccuracyimages", {
+		type: "scatter",
+		data: {
+			datasets: [{
+				pointRadius: 4,
+				pointBackgroundColor: "rgb(0,0,255)",
+				data: xyConfidenceAccuracyImages,
+			}],
+		},
+		options: {
+			legend: { display: false },
+			scales: {
+				xAxes: [{ ticks: { min: 0, max: 100 }, scaleLabel: { display: true, labelString: "Image Accuracy (Percentage %)" } }],
+				yAxes: [{ ticks: { min: 0, max: 100 }, scaleLabel: { display: true, labelString: "Confidence (Percentage %)" } }],
+			},
+			showLines: false,
+		},
+	});
+
+	new Chart("confidenceaccuracypoems", {
+		type: "scatter",
+		data: {
+			datasets: [{
+				pointRadius: 4,
+				pointBackgroundColor: "rgb(0,0,255)",
+				data: xyConfidenceAccuracyPoems,
+			}],
+		},
+		options: {
+			legend: { display: false },
+			scales: {
+				xAxes: [{ ticks: { min: 0, max: 100 }, scaleLabel: { display: true, labelString: "Poem Accuracy (Percentage %)" } }],
+				yAxes: [{ ticks: { min: 0, max: 100 }, scaleLabel: { display: true, labelString: "Confidence (Percentage %)" } }],
+			},
+			showLines: false,
+		},
+	});
+
+	new Chart("timeaccuracy", {
+		type: "scatter",
+		data: {
+			datasets: [{
+				pointRadius: 4,
+				pointBackgroundColor: "rgb(0,0,255)",
+				data: xyTimeAccuracy,
+			}],
+		},
+		options: {
+			legend: { display: false },
+			scales: {
+				xAxes: [{ ticks: { min: 0, max: 35 }, scaleLabel: { display: true, labelString: "Average Time Spent (s)" } }],
+				yAxes: [{ ticks: { min: 0, max: 100 }, scaleLabel: { display: true, labelString: "Accuracy (Percentage %)" } }],
+			},
+			showLines: false,
+		},
+	});
+
+	new Chart("timeaccuracyimages", {
+		type: "scatter",
+		data: {
+			datasets: [{
+				pointRadius: 4,
+				pointBackgroundColor: "rgb(0,0,255)",
+				data: xyTimeAccuracyImages,
+			}],
+		},
+		options: {
+			legend: { display: false },
+			scales: {
+				xAxes: [{ ticks: { min: 0, max: 35 }, scaleLabel: { display: true, labelString: "Average Time Spent (s)" } }],
+				yAxes: [{ ticks: { min: 0, max: 100 }, scaleLabel: { display: true, labelString: "Image Accuracy (Percentage %)" } }],
+			},
+			showLines: false,
+		},
+	});
+
+	new Chart("timeaccuracypoems", {
+		type: "scatter",
+		data: {
+			datasets: [{
+				pointRadius: 4,
+				pointBackgroundColor: "rgb(0,0,255)",
+				data: xyTimeAccuracyPoems,
+			}],
+		},
+		options: {
+			legend: { display: false },
+			scales: {
+				xAxes: [{ ticks: { min: 0, max: 35 }, scaleLabel: { display: true, labelString: "Average Time Spent (s)" } }],
+				yAxes: [{ ticks: { min: 0, max: 100 }, scaleLabel: { display: true, labelString: "Poem Accuracy (Percentage %)" } }],
+			},
+			showLines: false,
+		},
+	});
+
+	new Chart("baraccuracy", {
 		type: "bar",
 		data: {
 			labels: ["photo 1", "painting 2", "animal 3", "photo  4", "pencil 5", "painting 6", "animal 7", "photo 8", "photo 9", "painting 10", "painting 11", "photo 12", "paiting 13", "photo 14", "painting 15", "paiting 16", "paiting 17", "paiting 18", "photo 19", "photo 20", "", "poem 1", "poem 2", "poem 3", "poem 4", "poem 5", "poem 6"],
@@ -43,43 +169,6 @@ $(window).load(function() {
 			},
 		},
 	});
-
-
-	// new Chart("myChart", {
-	// 	type: "scatter",
-	// 	data: {
-	// 		datasets: [{
-	// 			pointRadius: 4,
-	// 			pointBackgroundColor: "rgb(0,0,255)",
-	// 			data: xyValues,
-	// 		}],
-	// 	},
-	// 	options: {
-	// 		legend: { display: false },
-	// 		scales: {
-	// 			xAxes: [{ ticks: { min: 0, max: 100 }, scaleLabel: { display: true, labelString: "Accuracy (Percentage %)" } }],
-	// 			yAxes: [{ ticks: { min: 0, max: 100 }, scaleLabel: { display: true, labelString: "Confidence (Percentage %)" } }],
-	// 		},
-	// 	},
-	// });
-
-	// new Chart("myChart", {
-	// 	type: "scatter",
-	// 	data: {
-	// 		datasets: [{
-	// 			pointRadius: 4,
-	// 			pointBackgroundColor: "rgb(0,0,255)",
-	// 			data: xyValues,
-	// 		}],
-	// 	},
-	// 	options: {
-	// 		legend: { display: false },
-	// 		scales: {
-	// 			xAxes: [{ ticks: { min: 0, max: 35 }, scaleLabel: { display: true, labelString: "Average Time Spent (s)" } }],
-	// 			yAxes: [{ ticks: { min: 0, max: 100 }, scaleLabel: { display: true, labelString: "Accuracy (Percentage %)" } }],
-	// 		},
-	// 	},
-	// });
 });
 
 function getAccuracyAvgForEachPage() {

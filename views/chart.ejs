@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/chart.css">
+	<script>
+		const answers = JSON.parse(<%- answers %>);
+		const allData = <%- allData %>;
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script defer src="/javascript/graphCreator.js"></script>
+	<title>Charts | Science Fair</title>
+</head>
+<body>
+	<div class="charts">
+		<h1 class="title">Charts</h1>
+		<br><br><br>
+		<canvas class="chart" id="confidenceaccuracy" style="width:100%;max-width:800px"></canvas>
+		<canvas class="chart" id="confidenceaccuracyimages" style="width:100%;max-width:800px"></canvas>
+		<canvas class="chart" id="confidenceaccuracypoems" style="width:100%;max-width:800px"></canvas>
+
+	
+		<canvas class="chart" id="timeaccuracy" style="width:100%;max-width:800px"></canvas>
+		<canvas class="chart" id="timeaccuracyimages" style="width:100%;max-width:800px"></canvas>
+		<canvas class="chart" id="timeaccuracypoems" style="width:100%;max-width:800px"></canvas>
+	
+		<canvas class="chart" id="baraccuracy" style="width:100%;max-width:800px"></canvas>
+	</div>
+</body>
+</html>

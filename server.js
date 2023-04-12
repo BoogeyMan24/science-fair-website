@@ -40,11 +40,13 @@ const indexRouter = require("./routes/index.js");
 const quizRouter = require("./routes/quiz.js");
 const userRouter = require("./routes/user.js");
 const demoRouter = require("./routes/demo.js");
+const chartRouter = require("./routes/chart.js");
 
 app.use("/", indexRouter);
 app.use("/quiz", quizRouter);
 app.use("/user", userRouter);
 app.use("/demo", demoRouter);
+app.use("/chart", chartRouter);
 
 
 app.listen(process.env.PORT);
