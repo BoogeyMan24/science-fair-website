@@ -203,7 +203,7 @@ function checkFinishDisabled() {
 		}
 	}
 
-	if (allAnswered || !allAnswered) {
+	if (allAnswered) {
 		$("#finishbutton").text("Finish");
 		$("#finishbutton").prop("disabled", false);
 	} else {
