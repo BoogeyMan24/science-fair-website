@@ -175,7 +175,7 @@ function setFakeWrong() {
 
 function createQRCode() {
 	new QRCode(document.getElementById("qrcode"), {
-		text: `https://localhost:5001/demo/results/${id}`,
+		text: `https://isitreal.uk/demo/results/${id}`,
 		width: (0.09 * screen.width),
 		height: (0.09 * screen.width),
 	});
