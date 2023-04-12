@@ -69,3 +69,16 @@ body {
 #input {
 	width: 45%;
 }
+
+
+.poemtitle {
+	font-size: 3vh;
+}
+
+.poemtext {
+	font-size: 2vh;
+}
+
+.finishbutton {
+	margin: 1vh 0px 0px 0px;
+}

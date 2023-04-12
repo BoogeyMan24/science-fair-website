@@ -39,10 +39,20 @@ db.on("error", error => console.log(error));
 const indexRouter = require("./routes/index.js");
 const quizRouter = require("./routes/quiz.js");
 const userRouter = require("./routes/user.js");
+const demoRouter = require("./routes/demo.js");
 
 app.use("/", indexRouter);
 app.use("/quiz", quizRouter);
 app.use("/user", userRouter);
+app.use("/demo", demoRouter);
 
 
 app.listen(process.env.PORT);
+
+
+
+// Visualizing data
+// Confidence to Reallity - line graph (Done)
+// Time spent to Accuracy - bar graph  ()
+// Average Accuracy for each image - analyze those images
+// Response - bullet points

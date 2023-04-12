@@ -4,14 +4,10 @@ const router = express.Router();
 
 
 router.get("/", async (req, res) => {
-	res.redirect("/");
-	return;
 	res.render("usermain.ejs");
 });
 
 router.post("/", async (req, res) => {
-	res.redirect("/user");
-	return;
 	if (req.body.id == null || req.body.id.length < 21 || req.body.id.length > 21) {
 		handleError(res, req, "doesntexist");
 		return;
@@ -31,7 +27,7 @@ router.post("/", async (req, res) => {
 		}
 
 		// SUCCESS
-		res.redirect(`/user/results/${req.body.id}`);
+		res.redirect(`/user/${req.body.id}`);
 		return;
 	} catch (e) {
 		handleError(res, req, "doesntexist");
@@ -39,22 +35,14 @@ router.post("/", async (req, res) => {
 	}
 });
 
-router.get("/results", async (req, res) => {
-	res.redirect("/");
-	return;
-	res.redirect("/user");
-});
-
-router.get("/results/:id", async (req, res) => {
-	res.redirect("/");
-	return;
+router.get("/:id", async (req, res) => {
 	let userData = await userModel.findOne({ id: req.params.id });
 	if (!userData) {
 		res.redirect("/user");
 		return;
 	}
 	userData = { id: userData.id, acceptedTerms: userData.acceptedTerms, verified: userData.verified, fullName: userData.fullName, class: userData.class, age: userData.age, confidence: userData.confidence, results: userData.results };
-	// res.render("user.ejs", { id: req.params.id, answers: JSON.stringify(process.env.FAKE_ANSWERS), userData: JSON.stringify(userData) });
+	res.render("user.ejs", { id: req.params.id, answers: JSON.stringify(process.env.ANSWERS), userData: JSON.stringify(userData) });
 });
 
 function handleError(res, req, error) {

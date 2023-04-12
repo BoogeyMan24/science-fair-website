@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script defer src="/javascript/demo.js"></script>
+	<link rel="stylesheet" href="/css/quiz.css">
+	<link rel="preload" href="/demo/images/0.png" as="image" fetchpriority="high">
+	<link rel="preload" href="/demo/images/1.png" as="image" fetchpriority="high">
+	<link rel="preload" href="/demo/images/2.png" as="image" fetchpriority="high">
+	<link rel="preload" href="/demo/images/3.png" as="image" fetchpriority="high">
+	<link rel="preload" href="/demo/images/4.png" as="image" fetchpriority="high">
+	<title>Quiz | Science Fair</title>
+</head>
+<body>
+	<div class="div">
+		<h1 class="centered title">Demo</h1>
+		<div class="centered">
+			<img onclick="updateImage()" src="/demo/images/0.png" id="image" width="332" height="332">
+			<h5 class="centered poem" id="poem" style="display:none">peom here</h5>
+			<h5 class="centered longerLoad" id="longerLoad">Some images may take longer to load</h5>
+		</div>
+		
+		<div class="centered buttons" id="buttons">
+			<button class="button" id="buttonFakeWrap" onclick="toggleFake(this)"><input type="checkbox" onclick="toggleFake(this)" id="fakeButton" style="display:none" value="fake"><label>Fake</label></button>
+			<button class="button" id="buttonRealWrap" onclick="toggleReal(this)"><input type="checkbox" onclick="toggleReal(this)" id="realButton" style="display:none" value="real"><label>Real</label></button>
+		</div>
+
+		<div class="centered">
+			<button onclick="submit(event)" class="button finishbutton" id="finishbutton" style="display:none">Not All Answered</button>
+		</div>
+		
+
+		<br>
+
+		<div class="centered">
+			<button onclick="prevPage()" id="backButton"><</button>
+			<button onclick="nextPage()" id="nextButton">></button>
+		</div>
+		<div class="centered">
+			<button onclick="submit(event)" id="submitButton" style="display:none">Results</button>
+		</div>
+		
+		<div class="progress">
+			<div id="1">1</div>
+			<div id="2">2</div>
+			<div id="3">3</div>
+			<div id="4">4</div>
+			<div id="5">5</div>
+			<div id="6">6</div>
+			<div id="7">7</div>
+			<div id="8">8</div>
+		</div>
+		
+	</div>
+</body>
+</html>

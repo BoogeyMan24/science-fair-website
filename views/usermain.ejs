@@ -12,13 +12,13 @@
 		<h1 class="centered title ">User</h1>
 		<h3 class="centered">Input your id below to find your results.<br> If you don't have your id speak to Petr/Adam.</h3>
 		<form class="centered" action="/user" method="post">
-			<div>
+			<div class="id">
 				<label for="id">Id: </label>
 				<input type="text" value="<%= locals.id || "" %>" name="id">
 			</div>
 
 			<div class="button-wrapper">
-				<button type="submit" class="button"><span>Show Results </span></button>
+				<button type="submit" class="button resultsbutton"><span>Show Results </span></button>
 			</div>
 		</form>
 

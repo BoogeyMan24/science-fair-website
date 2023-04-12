@@ -29,6 +29,8 @@ body {
 }
 
 .title-wrapper {
+	display: flex;
+	align-items: center;
 	width: 25vw;
 	margin: 0;
 }

@@ -1,6 +1,6 @@
 let page = 1;
-const numOfImages = 20;
-const numOfPoems = 6;
+const numOfImages = 5;
+const numOfPoems = 3;
 const numOfPages = numOfImages + numOfPoems;
 
 let mode = "images";
@@ -11,6 +11,8 @@ $(window).load(function() {
 	updatePage();
 	setCorrectNum();
 	setProgress();
+
+	createQRCode();
 });
 
 function nextPage() {
@@ -59,12 +61,6 @@ function updatePage() {
 		setFakeWrong();
 	}
 
-	if (page == 1) {
-		$("#timespent").text("Unavailavable for this page");
-	} else {
-		$("#timespent").text((userData.results[mode][(mode == "images" ? page : page - numOfImages) - 1].timeSpent / 1000).toFixed(2) + "s");
-	}
-
 	updateProgress();
 }
 
@@ -78,7 +74,7 @@ function updatePageNum(pageNum) {
 	updatePage();
 }
 
-const prefix = "/images/";
+const prefix = "/demo/images/";
 const suffix = ".png";
 
 function updateImage() {
@@ -86,7 +82,7 @@ function updateImage() {
 }
 
 async function updatePoem() {
-	const poems = await fetch("/poems/poems.json").then((response) => response.json());
+	const poems = await fetch("/demo/poems/poems.json").then((response) => response.json());
 	$("#poem").html("<span class=\"poemtitle lineheight\"> " + poems[page - numOfImages - 1].name + "</span> <br> <span class=\"poemtext lineheight\"> " + poems[page - numOfImages - 1].poem + "</span>");
 }
 
@@ -105,7 +101,7 @@ function switchQuestion() {
 function setCorrectNum() {
 	const correctNum = getNumOfCorrect();
 	$("#correctNum").text(correctNum);
-	$("#correctPercentage").text(Math.round(correctNum * 100 / 26));
+	$("#correctPercentage").text(Math.round(correctNum * 100 / numOfPages));
 	$("#correctPercentageConfidence").text(userData.confidence);
 }
 
@@ -174,4 +170,13 @@ function setFakeCorrect() {
 function setFakeWrong() {
 	unsetFakeReal();
 	$("#buttonFakeWrap").addClass("wrong");
+}
+
+
+function createQRCode() {
+	new QRCode(document.getElementById("qrcode"), {
+		text: `https://localhost:5001/demo/results/${id}`,
+		width: (0.09 * screen.width),
+		height: (0.09 * screen.width),
+	});
 }
