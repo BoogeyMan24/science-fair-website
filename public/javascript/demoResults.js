@@ -12,8 +12,6 @@ $(window).load(function() {
 	setCorrectNum();
 	setProgress();
 
-	console.log("test1");
-
 	createQRCode();
 });
 
@@ -176,11 +174,9 @@ function setFakeWrong() {
 
 
 function createQRCode() {
-	console.log(`https://isitreal.uk/demo/results/${id}`);
-	console.log("test2");
 	new QRCode(document.getElementById("qrcode"), {
-		text: `https://isitreal.uk/demo/results/${id}`,
-		width: (0.8 * screen.width),
-		height: (0.8 * screen.width),
+		text: `https://isitreal.uk/demo/results/${userData.id}`,
+		width: (0.085 * screen.width),
+		height: (0.085 * screen.width),
 	});
 }
