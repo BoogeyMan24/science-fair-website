@@ -28,6 +28,8 @@ $(window).load(function() {
 		if (i == numOfPages - 1) {
 			backgroundColor.push("rgb(0,0,0)");
 			backgroundColor.push("rgb(8, 191, 72, 0.6)");
+			backgroundColor.push("rgb(8, 191, 72, 0.6)");
+			backgroundColor.push("rgb(8, 191, 72, 0.6)");
 		}
 	}
 
@@ -41,6 +43,8 @@ $(window).load(function() {
 
 		if (i == numOfPages - 1) {
 			borderColor.push("rgb(0,0,0)");
+			borderColor.push("rgb(8, 191, 72, 0.8)");
+			borderColor.push("rgb(8, 191, 72, 0.8)");
 			borderColor.push("rgb(8, 191, 72, 0.8)");
 		}
 	}
@@ -164,7 +168,7 @@ $(window).load(function() {
 	new Chart("baraccuracy", {
 		type: "bar",
 		data: {
-			labels: ["photo 1", "painting 2", "animal 3", "photo  4", "pencil 5", "painting 6", "animal 7", "photo 8", "photo 9", "painting 10", "painting 11", "photo 12", "paiting 13", "photo 14", "painting 15", "paiting 16", "paiting 17", "paiting 18", "photo 19", "photo 20", "", "poem 1", "poem 2", "poem 3", "poem 4", "poem 5", "poem 6", "", "average"],
+			labels: ["photo 1", "painting 2", "animal 3", "photo  4", "pencil 5", "painting 6", "animal 7", "photo 8", "photo 9", "painting 10", "painting 11", "photo 12", "paiting 13", "photo 14", "painting 15", "paiting 16", "paiting 17", "paiting 18", "photo 19", "photo 20", "", "poem 1", "poem 2", "poem 3", "poem 4", "poem 5", "poem 6", "", "average", "images average", "poems average"],
 			datasets: [{
 				backgroundColor: backgroundColor,
 				borderColor: borderColor,
@@ -192,14 +196,24 @@ function getAccuracyAvgForEachPage() {
 	}
 
 	let total = 0;
+	let imageTotal = 0;
+	let poemTotal = 0;
+
 	for (let i = 0; i < yValues.length; i++) {
-		total += yValues[i];
+		total += parseFloat(yValues[i]);
+
+		if (i < numOfImages) {
+			imageTotal += parseFloat(yValues[i]);
+		} else if (i > numOfImages) {
+			poemTotal += parseFloat(yValues[i]);
+		}
 	}
-	total = parseFloat(total);
 
 	yValues.push(0);
-	console.log((total * 100 / yValues.length).toFixed(2));
-	yValues.push((total * 100 / yValues.length).toFixed(2));
+
+	yValues.push((total / numOfPages).toFixed(2));
+	yValues.push((imageTotal / numOfImages).toFixed(2));
+	yValues.push((poemTotal / numOfPoems).toFixed(2));
 
 	return yValues;
 }
