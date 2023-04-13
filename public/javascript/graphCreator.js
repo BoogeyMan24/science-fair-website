@@ -168,7 +168,7 @@ $(window).load(function() {
 	new Chart("baraccuracy", {
 		type: "bar",
 		data: {
-			labels: ["photo 1", "painting 2", "animal 3", "photo  4", "pencil 5", "painting 6", "animal 7", "photo 8", "photo 9", "painting 10", "painting 11", "photo 12", "paiting 13", "photo 14", "painting 15", "paiting 16", "paiting 17", "paiting 18", "photo 19", "photo 20", "", "poem 1", "poem 2", "poem 3", "poem 4", "poem 5", "poem 6", "", "average", "images average", "poems average"],
+			labels: ["photo 1", "painting 2", "animal 3", "photo  4", "pencil 5", "painting 6", "animal 7", "photo 8", "photo 9", "painting 10", "painting 11", "photo 12", "paiting 13", "photo 14", "painting 15", "paiting 16", "paiting 17", "paiting 18", "animal 19", "photo 20", "", "poem 1", "poem 2", "poem 3", "poem 4", "poem 5", "poem 6", "", "average", "images average", "poems average"],
 			datasets: [{
 				backgroundColor: backgroundColor,
 				borderColor: borderColor,
