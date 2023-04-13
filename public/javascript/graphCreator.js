@@ -24,6 +24,11 @@ $(window).load(function() {
 			backgroundColor.push("rgb(0,0,0)");
 		}
 		backgroundColor.push((answers[localMode][(i < numOfImages ? i : i - numOfImages)] == "real" ? "rgba(30, 126, 235, 0.6)" : "rgba(235, 64, 52, 0.6)"));
+
+		if (i == numOfPages - 1) {
+			backgroundColor.push("rgb(0,0,0)");
+			backgroundColor.push("rgb(8, 191, 72, 0.6)");
+		}
 	}
 
 	const borderColor = [];
@@ -33,6 +38,11 @@ $(window).load(function() {
 			borderColor.push("rgb(0,0,0)");
 		}
 		borderColor.push(((answers[localMode][(i < numOfImages ? i : i - numOfImages)]) == "real" ? "rgba(30, 126, 235, 0.8)" : "rgba(235, 64, 52, 0.8)"));
+
+		if (i == numOfPages - 1) {
+			borderColor.push("rgb(0,0,0)");
+			borderColor.push("rgb(8, 191, 72, 0.8)");
+		}
 	}
 
 
@@ -154,7 +164,7 @@ $(window).load(function() {
 	new Chart("baraccuracy", {
 		type: "bar",
 		data: {
-			labels: ["photo 1", "painting 2", "animal 3", "photo  4", "pencil 5", "painting 6", "animal 7", "photo 8", "photo 9", "painting 10", "painting 11", "photo 12", "paiting 13", "photo 14", "painting 15", "paiting 16", "paiting 17", "paiting 18", "photo 19", "photo 20", "", "poem 1", "poem 2", "poem 3", "poem 4", "poem 5", "poem 6"],
+			labels: ["photo 1", "painting 2", "animal 3", "photo  4", "pencil 5", "painting 6", "animal 7", "photo 8", "photo 9", "painting 10", "painting 11", "photo 12", "paiting 13", "photo 14", "painting 15", "paiting 16", "paiting 17", "paiting 18", "photo 19", "photo 20", "", "poem 1", "poem 2", "poem 3", "poem 4", "poem 5", "poem 6", "", "average"],
 			datasets: [{
 				backgroundColor: backgroundColor,
 				borderColor: borderColor,
@@ -175,11 +185,21 @@ function getAccuracyAvgForEachPage() {
 	const yValues = [];
 	for (let i = 0; i < numOfPages; i++) {
 		if (i == numOfImages) {
-			yValues.push("");
+			yValues.push(0);
 		}
 		const y = (getNumOfCorrectForPageFromAll(i) / allData.length * 100).toFixed(2);
 		yValues.push(y);
 	}
+
+	let total = 0;
+	for (let i = 0; i < yValues.length; i++) {
+		total += yValues[i];
+	}
+	total = parseFloat(total);
+
+	yValues.push(0);
+	console.log((total * 100 / yValues.length).toFixed(2));
+	yValues.push((total * 100 / yValues.length).toFixed(2));
 
 	return yValues;
 }
